@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>국산/수입차 최저가 장기렌트 & 오토리스 | 무료견적 받기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><circle cx="10" cy="10" r="1" fill="url(%23a)"/><circle cx="30" cy="5" r="1" fill="url(%23a)"/><circle cx="50" cy="15" r="1" fill="url(%23a)"/><circle cx="70" cy="8" r="1" fill="url(%23a)"/><circle cx="90" cy="12" r="1" fill="url(%23a)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 16px;
+            margin-bottom: 25px;
+            opacity: 0.95;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        .price-highlight {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .price-highlight h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .price-highlight p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Trust Section */
+        .trust {
+            padding: 30px 20px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1e3c72;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .reviews {
+            margin: 25px 0;
+        }
+
+        .review-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .reviewer {
+            font-size: 12px;
+            color: #888;
+            text-align: right;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 30px 20px;
+            background: white;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .benefit-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .benefit-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .benefit-item p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .form-section h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .form-section .subtitle {
+            text-align: center;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .consultation-form {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .privacy-consent {
+            margin-bottom: 25px !important;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            transform: scale(1.2);
+            accent-color: #667eea;
+        }
+
+        .checkbox-label {
+            flex: 1;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #555;
+            cursor: pointer;
+            margin-bottom: 0 !important;
+        }
+
+        .checkbox-text strong {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .checkbox-text small {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.3;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .privacy-detail-link {
+            color: #667eea;
+            text-decoration: underline;
+            font-size: 13px;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .privacy-detail-link:hover {
+            color: #5a6fd8;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 350px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 0.3s ease;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .modal-header h3 {
+            color: #1e3c72;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .modal-body {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .modal-body h4 {
+            color: #333;
+            margin: 15px 0 8px 0;
+            font-size: 15px;
+        }
+
+        .modal-body p {
+            margin-bottom: 12px;
+        }
+
+        .modal-body ul {
+            margin: 8px 0 12px 20px;
+        }
+
+        .modal-body li {
+            margin-bottom: 4px;
+        }
+
+        .modal-close {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            display: block;
+            margin: 20px auto 0;
+            transition: transform 0.2s;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { 
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0;
+            }
+            to { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 30px 20px;
+            background: #f8f9fa;
+        }
+
+        .process h2 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 25px;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .step-number {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+
+        .step-text {
+            font-size: 12px;
+            color: #555;
+        }
+
+        /* Urgency Section */
+        .urgency {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .timer {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .timer h3 {
+            margin-bottom: 10px;
+        }
+
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .live-counter {
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .pulse-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px 25px 0 0;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 -5px 20px rgba(40, 167, 69, 0.4);
+            z-index: 1000;
+            animation: bounce 2s infinite;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 24px; }
+            .benefit-grid { grid-template-columns: 1fr; }
+            .process-steps { flex-direction: column; gap: 20px; }
+            .step:not(:last-child)::after { 
+                content: '↓';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>🚗 국산/수입차 최저가<br>장기렌트 & 오토리스!</h1>
+                <p class="subtitle">비교견적 무료 제공 / 무심사 특가 진행 중</p>
+                
+                <div class="price-highlight">
+                    <h2>월 49만원부터~</h2>
+                    <p>무보증 • 초기비용 0원 • 당일 승인</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Section -->
+        <section class="trust">
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">30,000+</span>
+                    <span class="stat-label">누적 계약</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.8★</span>
+                    <span class="stat-label">고객 만족도</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24시간</span>
+                    <span class="stat-label">빠른 승인</span>
+                </div>
+            </div>
+
+            <div class="reviews">
+                <div class="review-item">
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">"무심사로 승인받고 당일 출고! 정말 간편하고 빨라요"</div>
+                    <div class="reviewer">- 김○○님 (소나타 계약)</div>
+                </div>
+                <div class="review-item">
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">"다른 곳보다 월 5만원 저렴하게 계약했어요. 강추!"</div>
+                    <div class="reviewer">- 박○○님 (K8 계약)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <h2>🎯 특별 혜택 & 장점</h2>
+            <div class="benefit-grid">
+                <div class="benefit-item">
+                    <h3>💰 무보증금</h3>
+                    <p>초기비용 0원<br>부담 없이 시작</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>⚡ 무심사</h3>
+                    <p>복잡한 서류 없이<br>당일 승인</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>🏆 최저가</h3>
+                    <p>전국 최저가<br>보장 서비스</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>🛡️ 올인원</h3>
+                    <p>보험·세금·정비<br>모두 포함</p>
+                </div>
+            </div>
+            
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; text-align: center;">
+                <strong>🔥 사업자 절세 혜택 + 개인도 OK!</strong><br>
+                <small>G80, 카니발, 팰리세이드, K8 등 인기차종 대기 중</small>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section class="form-section">
+            <h2>💬 3초 신청하고<br>무료 견적 받아보기!</h2>
+            <p class="subtitle">전문 상담사가 1:1 맞춤 상담 도와드립니다</p>
+            
+            <form class="consultation-form" id="consultationForm">
+                <div class="form-group">
+                    <label for="name">이름 *</label>
+                    <input type="text" id="name" name="name" required placeholder="홍길동">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">연락처 *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678">
+                </div>
+
+                <div class="form-group">
+                    <label for="car">제조사 / 차종 *</label>
+                    <input type="text" id="phone" name="car" required placeholder="현대/제네시스">
+                </div>
+                
+                <div class="form-group">
+                    <label for="method">구매방식 *</label>
+                    <select id="method" name="method" required>
+                        <option value="">선택해주세요</option>
+                        <option value="오토리스">오토리스</option>
+                        <option value="장기렌트">장기렌트</option>
+                        <option value="무심사렌트">무심사렌트</option>
+                        <option value="기타">기타</option>
+                        </select>
+                </div>
+
+                <div class="form-group privacy-consent">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy" class="checkbox-label">
+                            <span class="checkbox-text">
+                                <strong>개인정보 수집 및 이용동의 (필수)</strong>
+                                <a href="#" class="privacy-detail-link" onclick="openPrivacyModal(event)">내용보기</a><br>
+                                <small>해당 서비스 제공을 위해서 필요한 최소한의 개인정보이므로 동의를 해 주셔야 서비스를 이용하실 수 있습니다.</small>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">🎁 무료 견적 받기</button>
+            </form>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process">
+            <h2>📋 간단한 3단계 절차</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">무료 상담<br>신청</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">맞춤 조건<br>비교</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">계약 및<br>당일 출고</div>
+                </div>
+            </div>
+            
+            <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                <h3 style="color: #1e3c72; margin-bottom: 15px; text-align: center;">🤔 장기렌트 vs 오토리스 궁금하다면?</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 14px;">
+                    <div>
+                        <strong>장기렌트</strong><br>
+                        • 개인 이용 최적<br>
+                        • 간편한 절차<br>
+                        • 전액 비용처리
+                    </div>
+                    <div>
+                        <strong>오토리스</strong><br>
+                        • 사업자 절세<br>
+                        • 유지비 절약<br>
+                        • 자산 관리 효율
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Urgency Section -->
+        <section class="urgency">
+            <div class="timer">
+                <h3>⏰ 이번 달 한정 특가!</h3>
+                <div class="countdown" id="countdown">23:45:32</div>
+                <p>남은 시간 후 정가로 변경됩니다</p>
+            </div>
+            
+            <div class="live-counter">
+                <span class="pulse-dot"></span>
+                실시간 <strong id="applicants">127</strong>명이 상담 신청 중
+            </div>
+            
+            <p><strong>🎁 오늘 상담 신청 시 5만원 상품권 증정!</strong></p>
+        </section>
+
+        <!-- Floating CTA -->
+        <button class="floating-cta" onclick="document.getElementById('consultationForm').scrollIntoView({behavior: 'smooth'})">
+            💬 무료 상담 신청하기
+        </button>
+
+        <!-- Privacy Modal -->
+        <div class="modal-overlay" id="privacyModal" onclick="closePrivacyModal(event)">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h3>📋 개인정보 수집 및 이용동의</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>1. 개인정보 수집 항목</h4>
+                    <ul>
+                        <li>필수항목: 이름, 연락처(휴대폰번호), 관심차종</li>
+                        <li>선택항목: 상담 시 추가 제공하는 정보</li>
+                    </ul>
+
+                    <h4>2. 개인정보 수집 및 이용목적</h4>
+                    <ul>
+                        <li>자동차 렌트/리스 상담 서비스 제공</li>
+                        <li>맞춤형 견적 안내 및 계약 관련 업무</li>
+                        <li>고객 문의사항 처리 및 A/S 지원</li>
+                        <li>새로운 서비스 및 이벤트 정보 안내</li>
+                    </ul>
+
+                    <h4>3. 개인정보 보유 및 이용기간</h4>
+                    <p>• 상담 완료 후 1년간 보관<br>
+                    • 계약 체결 시 계약 종료 후 5년간 보관<br>
+                    • 고객 요청 시 즉시 삭제 처리</p>
+
+                    <h4>4. 개인정보 제3자 제공</h4>
+                    <p>• 고객의 별도 동의 없이 제3자에게 제공하지 않습니다<br>
+                    • 단, 법령에 따른 요구가 있을 경우 예외</p>
+
+                    <h4>5. 개인정보 처리 위탁</h4>
+                    <p>• 상담 서비스 운영을 위해 전문업체에 위탁할 수 있습니다<br>
+                    • 위탁업체: 고객상담센터, SMS/알림톡 발송업체</p>
+
+                    <h4>6. 동의 거부권 및 불이익</h4>
+                    <p>• 개인정보 수집에 동의하지 않을 권리가 있습니다<br>
+                    • 단, 동의 거부 시 상담 서비스 이용이 제한됩니다</p>
+                </div>
+                <button class="modal-close" onclick="closePrivacyModal()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const diff = tomorrow - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Live applicants counter
+        function updateApplicants() {
+            const base = 127;
+            const variation = Math.floor(Math.random() * 10) - 5;
+            document.getElementById('applicants').textContent = base + variation;
+        }
+
+        // Privacy Modal Functions
+        function openPrivacyModal(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('privacyModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        }
+
+        function closePrivacyModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('privacyModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // 스크롤 복원
+        }
+
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closePrivacyModal();
+            }
+        });
+
+        // Form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const car = document.getElementById('car').value;
+            const privacy = document.getElementById('privacy').checked;
+            
+            if (!privacy) {
+                alert('개인정보 수집 및 이용에 동의해주셔야 서비스를 이용하실 수 있습니다.');
+                return;
+            }
+            
+            if (name && phone && car && privacy) {
+                // 실제로는 서버로 데이터를 전송
+                alert(`${name}님, 상담 신청이 완료되었습니다!\n담당자가 곧 ${phone}로 연락드리겠습니다.\n관심차종: ${car}`);
+                
+                // 폼 초기화
+                this.reset();
+            }
+        });
+
+        // Initialize
+        setInterval(updateCountdown, 1000);
+        setInterval(updateApplicants, 15000);
+        updateCountdown();
+        updateApplicants();
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
