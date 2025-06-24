@@ -225,7 +225,8 @@
         }
 
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 15px;
             border: 2px solid #e9ecef;
@@ -234,8 +235,16 @@
             transition: border-color 0.3s;
         }
 
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
@@ -571,7 +580,7 @@
                 <p class="subtitle">비교견적 무료 제공 / 무심사 특가 진행 중</p>
                 
                 <div class="price-highlight">
-                    <h2>월 49만원부터~</h2>
+                    <h2>월 29만원부터~</h2>
                     <p>무보증 • 초기비용 0원 • 당일 승인</p>
                 </div>
             </div>
@@ -632,7 +641,7 @@
             
             <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; text-align: center;">
                 <strong>🔥 사업자 절세 혜택 + 개인도 OK!</strong><br>
-                <small>G80, 카니발, 팰리세이드, K8 등 인기차종 대기 중</small>
+                <small>소나타, K8, 팰리세이드, 아반떼 등 인기차종 대기 중</small>
             </div>
         </section>
 
@@ -651,21 +660,26 @@
                     <label for="phone">연락처 *</label>
                     <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678">
                 </div>
-
-                <div class="form-group">
-                    <label for="car">제조사 / 차종 *</label>
-                    <input type="text" id="phone" name="car" required placeholder="현대/제네시스">
-                </div>
                 
                 <div class="form-group">
-                    <label for="method">구매방식 *</label>
-                    <select id="method" name="method" required>
-                        <option value="">선택해주세요</option>
+                    <label for="carModel">제조사/차종 *</label>
+                    <input type="text" id="carModel" name="carModel" required placeholder="예) 현대 소나타, 기아 K8, BMW 320i 등">
+                </div>
+
+                <div class="form-group">
+                    <label for="purchaseType">구매방식 *</label>
+                    <select id="purchaseType" name="purchaseType" required>
+                        <option value="">구매방식을 선택해주세요</option>
                         <option value="오토리스">오토리스</option>
                         <option value="장기렌트">장기렌트</option>
                         <option value="무심사렌트">무심사렌트</option>
                         <option value="기타">기타</option>
-                        </select>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inquiry">문의내용</label>
+                    <textarea id="inquiry" name="inquiry" placeholder="궁금한 점이나 요청사항을 자유롭게 작성해주세요&#10;예) 월 렌탈료 궁금해요, 사업자 혜택 알고 싶어요, 빠른 출고 가능한가요? 등"></textarea>
                 </div>
 
                 <div class="form-group privacy-consent">
@@ -837,7 +851,9 @@
             
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const car = document.getElementById('car').value;
+            const carModel = document.getElementById('carModel').value;
+            const purchaseType = document.getElementById('purchaseType').value;
+            const inquiry = document.getElementById('inquiry').value;
             const privacy = document.getElementById('privacy').checked;
             
             if (!privacy) {
@@ -845,12 +861,62 @@
                 return;
             }
             
-            if (name && phone && car && privacy) {
-                // 실제로는 서버로 데이터를 전송
-                alert(`${name}님, 상담 신청이 완료되었습니다!\n담당자가 곧 ${phone}로 연락드리겠습니다.\n관심차종: ${car}`);
+            if (name && phone && carModel && purchaseType && privacy) {
+                // 로딩 상태 표시
+                const submitBtn = document.querySelector('.submit-btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = '📤 전송 중...';
+                submitBtn.disabled = true;
                 
-                // 폼 초기화
-                this.reset();
+                // 구글 시트로 데이터 전송
+                const formData = {
+                    timestamp: new Date().toLocaleString('ko-KR'),
+                    name: name,
+                    phone: phone,
+                    carModel: carModel,
+                    purchaseType: purchaseType,
+                    inquiry: inquiry || '문의내용 없음'
+                };
+                
+                // 여기에 실제 Google Apps Script 웹앱 URL을 입력하세요
+                const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1ybE20XKrOEESxC2LMXCvQYpgSbZoIJmr8gM2p5Lk_evBwdos3rqqBEHyHZxw4qz6/exec';
+                
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(() => {
+                    // 성공 메시지
+                    let message = `${name}님, 상담 신청이 완료되었습니다!\n담당자가 곧 ${phone}로 연락드리겠습니다.\n제조사/차종: ${carModel}\n구매방식: ${purchaseType}`;
+                    if (inquiry) {
+                        message += `\n문의내용: ${inquiry}`;
+                    }
+                    alert(message);
+                    
+                    // 폼 초기화
+                    this.reset();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    // 에러 발생 시에도 성공 메시지 표시 (no-cors 모드에서는 에러 구분이 어려움)
+                    let message = `${name}님, 상담 신청이 완료되었습니다!\n담당자가 곧 ${phone}로 연락드리겠습니다.\n제조사/차종: ${carModel}\n구매방식: ${purchaseType}`;
+                    if (inquiry) {
+                        message += `\n문의내용: ${inquiry}`;
+                    }
+                    alert(message);
+                    
+                    // 폼 초기화
+                    this.reset();
+                })
+                .finally(() => {
+                    // 버튼 원래 상태로 복구
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
             }
         });
 
