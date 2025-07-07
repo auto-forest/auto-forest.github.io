@@ -1254,16 +1254,7 @@
                 showSuccess();
                 
                 // Show detailed success message
-                const successMessage = `✅ ${formData.name}님, 상담 신청이 완료되었습니다!
-
-📞 담당자가 곧 연락드리겠습니다.
-📱 연락처: ${formData.phone}
-🚗 희망차종: ${formData.carType}
-📋 구매유형: ${formData.rentalType}
-
-⏰ 영업시간 내 1시간 이내 연락드립니다.
-
-감사합니다!`;
+                const successMessage = `${formData.name}님, 상담 신청이 완료되었습니다!\n\n담당자가 곧 연락드리겠습니다.\n\n[신청 정보]\n연락처: ${formData.phone}\n희망차종: ${formData.carType}\n구매유형: ${formData.rentalType}\n\n영업시간 내 1시간 이내 연락드립니다.\n감사합니다!`;
                 
                 alert(successMessage);
                 
@@ -1274,15 +1265,7 @@
                 console.error('Error:', error);
                 // Even if there's an error, show success (due to no-cors mode)
                 showSuccess();
-                alert(`✅ ${formData.name}님의 상담 신청이 완료되었습니다!
-
-담당자가 곧 연락드리겠습니다.
-
-📱 ${formData.phone}
-🚗 ${formData.carType}
-📋 ${formData.rentalType}
-
-감사합니다!`);
+                alert(`${formData.name}님의 상담 신청이 완료되었습니다!\n\n담당자가 곧 연락드리겠습니다.\n감사합니다!`);
                 e.target.reset();
             } finally {
                 // Reset button state
