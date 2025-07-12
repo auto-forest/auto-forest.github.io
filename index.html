@@ -163,32 +163,9 @@
             position: relative;
         }
         
-        .form-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        
-        .form-tab {
-            flex: 1;
-            padding: 12px 20px;
-            background: #f8f9fa;
-            border: 2px solid transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .form-tab.active {
-            background: #28a745;
-            color: white;
-            border-color: #28a745;
-        }
-        
         .form-header {
             margin-bottom: 25px;
+            text-align: center;
         }
         
         .form-header h2 {
@@ -806,11 +783,6 @@
                 </div>
                 
                 <div class="quick-form" id="consultation-form">
-                    <div class="form-tabs">
-                        <div class="form-tab active" onclick="selectTab('personal')">개인</div>
-                        <div class="form-tab" onclick="selectTab('business')">법인/개인사업자</div>
-                    </div>
-                    
                     <div class="form-header">
                         <h2>1분 무료 견적 받기</h2>
                         <p>전문 컨설턴트가 최적의 플랜을 제안해드립니다</p>
@@ -829,30 +801,31 @@
                             </div>
                         </div>
                         
+                        <div class="form-group">
+                            <label for="customer-type">고객 구분 *</label>
+                            <select id="customer-type" name="customer-type" required>
+                                <option value="">선택해주세요</option>
+                                <option value="개인">개인</option>
+                                <option value="법인">법인</option>
+                                <option value="개인사업자">개인사업자</option>
+                            </select>
+                        </div>
+                        
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="vehicle-type">희망 차종</label>
-                                <select id="vehicle-type" name="vehicle-type">
-                                    <option value="">선택해주세요</option>
-                                    <option value="compact">준중형 (아반떼, K3)</option>
-                                    <option value="midsize">중형 (쏘나타, K5)</option>
-                                    <option value="fullsize">준대형 (그랜저, K8)</option>
-                                    <option value="luxury">대형 (제네시스, K9)</option>
-                                    <option value="suv">SUV (투싼, 스포티지)</option>
-                                    <option value="import">수입차</option>
-                                    <option value="electric">전기차</option>
-                                </select>
+                                <input type="text" id="vehicle-type" name="vehicle-type" placeholder="예: 쏘나타, 그랜저, 벤츠 E클래스">
                             </div>
                             
                             <div class="form-group">
                                 <label for="period">이용 기간</label>
                                 <select id="period" name="period">
                                     <option value="">선택해주세요</option>
-                                    <option value="12">12개월</option>
-                                    <option value="24">24개월</option>
-                                    <option value="36">36개월</option>
-                                    <option value="48">48개월</option>
-                                    <option value="60">60개월</option>
+                                    <option value="12개월">12개월</option>
+                                    <option value="24개월">24개월</option>
+                                    <option value="36개월">36개월</option>
+                                    <option value="48개월">48개월</option>
+                                    <option value="60개월">60개월</option>
                                 </select>
                             </div>
                         </div>
@@ -1003,7 +976,7 @@
                         서비스 품질이 기대 이상이어서 주변 동료들에게도 적극 추천하고 있습니다."</p>
                     </div>
                     <div class="testimonial-footer">
-                        <span class="contract-info">📅 계약 기간: 60개월 | 🚗 재계약 예정</span>
+                        <span class="contract-info">📅 계약 기간: 24개월 | 🚗 재계약 예정</span>
                     </div>
                 </div>
             </div>
@@ -1245,13 +1218,19 @@
     <script>
         // 탭 선택
         function selectTab(type) {
-            const tabs = document.querySelectorAll('.form-tab');
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.textContent.includes(type === 'personal' ? '개인' : '법인')) {
-                    tab.classList.add('active');
-                }
-            });
+            const personalTab = document.getElementById('personal-tab');
+            const businessTab = document.getElementById('business-tab');
+            
+            // 모든 탭 비활성화
+            personalTab.classList.remove('active');
+            businessTab.classList.remove('active');
+            
+            // 선택된 탭만 활성화
+            if (type === 'personal') {
+                personalTab.classList.add('active');
+            } else {
+                businessTab.classList.add('active');
+            }
         }
         
 async function handleSubmit(event) {
@@ -1266,15 +1245,15 @@ async function handleSubmit(event) {
     const formData = {
         name: document.getElementById('name').value,
         phone: document.getElementById('phone').value,
+        customerType: document.getElementById('customer-type').value,
         vehicleType: document.getElementById('vehicle-type').value,
         period: document.getElementById('period').value,
-        purchaseType: document.getElementById('purchase-type').value,
-        customerType: document.querySelector('.form-tab.active').textContent.includes('개인') ? '개인' : '법인/개인사업자'
+        purchaseType: document.getElementById('purchase-type').value
     };
     
     try {
         // Google Apps Script URL (배포 시 받은 URL)
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLoxl-zbWhZSoZfY3FUzR8CedQnKv7TF_WatoXD-VhoYhZuyKuL69sGEAtpTykGAM1/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwM9DSb_lGuJihfYij26LoxcKtjvuM4b5KH8WFGdTzelXv2-NBQ_lBNGndwJ-JIzQMT/exec';
         
         const response = await fetch(SCRIPT_URL, {
             method: 'POST',
