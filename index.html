@@ -4,6 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오토포레스트 - 개인·법인 맞춤 오토리스 & 장기렌트</title>
+    <script>
+        // 전화번호 하이픈 자동 추가 함수를 먼저 정의
+        function addHyphen(obj) {
+            var number = obj.value.replace(/[^0-9]/g, "");
+            var phone = "";
+
+            if(number.length < 4) {
+                phone = number;
+            } else if(number.length < 7) {
+                phone += number.substr(0, 3);
+                phone += "-";
+                phone += number.substr(3);
+            } else if(number.length < 11) {
+                phone += number.substr(0, 3);
+                phone += "-";
+                phone += number.substr(3, 3);
+                phone += "-";
+                phone += number.substr(6);
+            } else {
+                phone += number.substr(0, 3);
+                phone += "-";
+                phone += number.substr(3, 4);
+                phone += "-";
+                phone += number.substr(7);
+            }
+            obj.value = phone;
+        }
+    </script>
     <style>
         * {
             margin: 0;
@@ -797,7 +825,7 @@
                             
                             <div class="form-group">
                                 <label for="phone">연락처 *</label>
-                                <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" maxlength="13" oninput="formatPhoneNumber(this)">
+                                <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" onkeyup="addHyphen(this)" maxlength="13">
                             </div>
                         </div>
                         
