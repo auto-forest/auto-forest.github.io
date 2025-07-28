@@ -3,35 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오토포레스트 - 개인·법인 맞춤 오토리스 & 장기렌트</title>
-    <script>
-        // 전화번호 하이픈 자동 추가 함수를 먼저 정의
-        function addHyphen(obj) {
-            var number = obj.value.replace(/[^0-9]/g, "");
-            var phone = "";
-
-            if(number.length < 4) {
-                phone = number;
-            } else if(number.length < 7) {
-                phone += number.substr(0, 3);
-                phone += "-";
-                phone += number.substr(3);
-            } else if(number.length < 11) {
-                phone += number.substr(0, 3);
-                phone += "-";
-                phone += number.substr(3, 3);
-                phone += "-";
-                phone += number.substr(6);
-            } else {
-                phone += number.substr(0, 3);
-                phone += "-";
-                phone += number.substr(3, 4);
-                phone += "-";
-                phone += number.substr(7);
-            }
-            obj.value = phone;
-        }
-    </script>
+    <title>오토포레스트 | 대한민국 No.1 자동차 리스·렌트 전문기업</title>
+    <meta name="description" content="32,000건 이상의 계약 실적, 98% 고객만족도. 법인/개인사업자 절세 전문 컨설팅, 전 차종 최저가 보장.">
+    
     <style>
         * {
             margin: 0;
@@ -39,80 +13,220 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #059669;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
-            /* 단어 단위로 줄바꿈하여 가독성 향상 */
-            word-break: keep-all; 
         }
         
-        /* 플로팅 CTA 버튼 */
-        .floating-cta {
+        /* 헤더 & 네비게이션 */
+        .header {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
-            animation: pulse 2s infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            box-shadow: var(--shadow);
             z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-top {
+            background: var(--dark);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header-top-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            opacity: 1;
+        }
+        
+        .nav-wrapper {
+            background: var(--white);
+            padding: 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary);
+            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .logo img {
+            width: 40px;
+            height: 40px;
         }
         
-        /* 상단 신뢰도 바 */
-        .trust-bar {
-            background: #f8f9fa;
-            padding: 10px 0;
-            border-bottom: 1px solid #e9ecef;
-            position: sticky;
-            top: 0;
-            z-index: 997;
-        }
-        
-        .trust-bar-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .nav-menu {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            list-style: none;
             gap: 40px;
-            font-size: 14px;
-            color: #666;
-            padding: 0 20px;
-        }
-        
-        .trust-bar-item {
-            display: flex;
             align-items: center;
-            gap: 5px;
-            white-space: nowrap; /* 모바일에서 줄바꿈 방지 */
         }
         
-        .trust-bar-item strong {
-            color: #28a745;
+        .nav-item {
+            position: relative;
         }
         
-        /* 히어로 섹션 */
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            box-shadow: var(--shadow-lg);
+            border-radius: 8px;
+            padding: 15px 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            padding: 10px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+        
+        .dropdown-item:hover {
+            background: var(--light-gray);
+            color: var(--primary);
+        }
+        
+        .nav-cta {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        /* 메인 히어로 섹션 */
         .hero {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 80px 20px 60px;
+            margin-top: 120px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 80px 20px;
             position: relative;
             overflow: hidden;
         }
@@ -120,381 +234,420 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            right: -200px;
+            top: -100px;
+            right: -100px;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
             animation: float 20s ease-in-out infinite;
         }
         
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, -50px) rotate(180deg); }
         }
         
-        .container {
+        .hero-container {
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;
-        }
-        
-        .hero-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 60px;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         
-        .hero h1 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.3; /* 줄간격 조정 */
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 24px;
         }
         
-        .hero .subtitle {
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
             font-size: 20px;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            color: var(--gray);
+            margin-bottom: 32px;
+            line-height: 1.6;
         }
         
-        .hero-benefits {
+        .hero-features {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 24px;
+            margin-bottom: 40px;
         }
         
-        .hero-benefit {
+        .hero-feature {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-size: 16px;
+            color: var(--dark);
         }
         
-        .hero-benefit::before {
-            content: '✓';
+        .hero-feature-icon {
+            color: var(--secondary);
+            font-size: 20px;
+        }
+        
+        .hero-buttons {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            font-weight: bold;
-            flex-shrink: 0; /* 아이콘이 찌그러지지 않도록 설정 */
+            gap: 16px;
+            flex-wrap: wrap;
         }
         
-        /* 빠른 상담 폼 */
-        .quick-form {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-        
-        .form-header {
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .form-header h2 {
-            color: #1e3c72;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
-        .form-header p {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-        
-        .form-group label {
-            display: block;
-            color: #333;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: #28a745;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
-        }
-        
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 16px;
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
             font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
         }
         
-        .submit-btn:hover {
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
         }
         
-        .form-footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 13px;
-            color: #666;
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
         }
         
-        .form-footer .highlight {
-            color: #28a745;
-            font-weight: 600;
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
         }
         
-        /* 고객 유형 선택 섹션 */
-        .customer-types {
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating-card {
+            position: absolute;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            animation: floatCard 3s ease-in-out infinite;
+        }
+        
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating-card.top-right {
+            top: -20px;
+            right: -20px;
+        }
+        
+        .floating-card.bottom-left {
+            bottom: -20px;
+            left: -20px;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        /* 서비스 섹션 */
+        .services {
             padding: 80px 20px;
-            background: #f8f9fa;
+            background: var(--white);
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
         
-        .section-header h2 {
-            font-size: 36px;
-            color: #1e3c72;
-            margin-bottom: 15px;
+        .section-label {
+            color: var(--primary);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .section-header p {
+        .section-title {
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        
+        .section-desc {
             font-size: 18px;
-            color: #666;
-            max-width: 600px; /* 문장이 길어질 때 자연스럽게 줄바꿈 되도록 */
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .type-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
+            color: var(--gray);
+            max-width: 600px;
             margin: 0 auto;
         }
         
-        .type-card {
-            background: white;
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--white);
             padding: 40px 30px;
-            border-radius: 15px;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
-            cursor: pointer;
+            border: 2px solid var(--light-gray);
             position: relative;
             overflow: hidden;
         }
         
-        .type-card::before {
+        .service-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
         
-        .type-card:hover {
+        .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .type-card:hover::before {
+        .service-card:hover::before {
             transform: scaleX(1);
         }
         
-        .type-icon {
+        .service-icon {
             width: 80px;
             height: 80px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 36px;
+            margin: 0 auto 24px;
+            transition: all 0.3s ease;
         }
         
-        .type-card h3 {
-            font-size: 22px;
-            color: #1e3c72;
-            margin-bottom: 15px;
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
         }
         
-        .type-features {
-            list-style: none;
-            text-align: left;
-            margin-top: 20px;
-            padding-left: 0; /* 기본 패딩 제거 */
+        .service-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 16px;
         }
         
-        .type-features li {
-            padding: 8px 0;
-            color: #666;
-            position: relative;
-            padding-left: 20px;
+        .service-desc {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 24px;
         }
         
-        .type-features li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #28a745;
-            font-weight: bold;
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s ease;
         }
         
-        /* 세금 절감 계산기 섹션 (구현되지 않아 주석 처리) */
-        /*
-        .tax-calculator { ... }
-        */
+        .service-link:hover {
+            gap: 10px;
+        }
         
         /* 차량 라인업 */
-        .vehicle-lineup {
+        .vehicles {
             padding: 80px 20px;
-            background: white;
+            background: var(--light-gray);
         }
         
-        .vehicle-categories {
+        .vehicle-tabs {
             display: flex;
             justify-content: center;
-            gap: 15px; /* 간격 조정 */
-            margin-bottom: 40px;
+            gap: 16px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
         }
         
-        .category-btn {
-            padding: 10px 25px; /* 패딩 조정 */
-            background: #f8f9fa;
-            border: 2px solid transparent;
-            border-radius: 30px;
+        .vehicle-tab {
+            padding: 12px 28px;
+            background: var(--white);
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
+            font-weight: 700;
+            color: var(--dark);
             cursor: pointer;
-            font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 15px; /* 폰트 크기 조정 */
         }
         
-        .category-btn.active {
-            background: #28a745;
-            color: white;
-            border-color: #28a745;
+        .vehicle-tab.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
         }
         
-        .vehicle-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+        .vehicle-tab:hover {
+            border-color: var(--primary);
+        }
+        
+        .vehicles-grid {
             max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .vehicle-card {
-            background: white;
-            border-radius: 15px;
+            background: var(--white);
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
         }
         
         .vehicle-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            box-shadow: var(--shadow-lg);
         }
         
         .vehicle-image {
             width: 100%;
             height: 200px;
-            background: #f8f9fa;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 64px;
-            color: #dee2e6;
+            font-size: 48px;
+            color: #d1d5db;
         }
         
-        .vehicle-info {
-            padding: 25px;
+        .vehicle-content {
+            padding: 24px;
         }
         
-        .vehicle-badge {
-            display: inline-block;
-            background: #e8f5e9;
-            color: #28a745;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+        .vehicle-brand {
+            color: var(--gray);
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .vehicle-name {
-            font-size: 20px;
-            font-weight: bold;
-            color: #1e3c72;
-            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 8px 0 16px;
+        }
+        
+        .vehicle-features {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .vehicle-feature {
+            font-size: 14px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         
         .vehicle-price {
-            font-size: 24px;
-            color: #28a745;
-            font-weight: bold;
-            margin-bottom: 5px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 20px;
         }
         
-        .vehicle-price-info {
+        .price-label {
             font-size: 14px;
-            color: #666;
+            color: var(--gray);
         }
         
-        /* 프로세스 섹션 */
+        .price-amount {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .price-unit {
+            font-size: 16px;
+            color: var(--gray);
+        }
+        
+        .vehicle-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--dark);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .vehicle-btn:hover {
+            background: var(--primary);
+        }
+        
+        /* 프로세스 */
         .process {
             padding: 80px 20px;
-            background: #f8f9fa;
+            background: var(--white);
         }
         
         .process-timeline {
@@ -503,806 +656,1907 @@
             position: relative;
         }
         
-        .process-timeline::before {
-            content: '';
+        .process-line {
             position: absolute;
-            top: 40px; /* 아이콘 중앙으로 위치 조정 */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
+            top: 50px;
+            left: 0;
+            right: 0;
             height: 2px;
-            background: #dee2e6;
+            background: var(--light-gray);
             z-index: 1;
         }
         
         .process-steps {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4단계이므로 4칸으로 고정 */
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
             position: relative;
             z-index: 2;
         }
         
         .process-step {
             text-align: center;
+            position: relative;
         }
         
         .step-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: white;
+            width: 100px;
+            height: 100px;
+            background: var(--white);
+            border: 4px solid var(--light-gray);
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover .step-icon {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+        }
+        
+        .step-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+        
+        .step-desc {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* 고객 후기 섹션 */
+        .reviews {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+        
+        .reviews-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .reviews-title-group {
+            flex: 1;
+        }
+        
+        .write-review-btn {
+            background: var(--primary);
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+        
+        .write-review-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+        }
+        
+        .review-stats {
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .reviews-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .review-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .review-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+        .review-info {
+            flex: 1;
+        }
+        
+        .review-name {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        
+        .review-car {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .review-rating {
+            color: #fbbf24;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .review-content {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .review-images {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .review-image {
+            width: 100px;
+            height: 100px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            font-weight: bold;
-            color: #28a745;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
+            color: #d1d5db;
         }
         
-        .step-icon.active {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-        }
-        
-        .step-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #1e3c72;
-            margin-bottom: 10px;
-        }
-        
-        .step-description {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5; /* 줄간격 조정 */
-        }
-        
-        /* FAQ 섹션 */
-        .faq {
-            padding: 80px 20px;
-            background: white;
-        }
-        
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            background: #f8f9fa;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-item:hover {
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .faq-question {
-            padding: 20px 25px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
+        .review-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #f3f4f6;
+        }
+        
+        .review-date {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .review-helpful {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .review-helpful:hover {
+            color: var(--primary);
+        }
+        
+        .load-more-btn {
+            display: block;
+            margin: 50px auto 0;
+            padding: 14px 40px;
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .faq-question:hover {
-            background: #e9ecef;
+        .load-more-btn:hover {
+            background: var(--primary);
+            color: var(--white);
         }
         
-        .faq-answer {
-            padding: 0 25px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* 부드러운 효과 */
-            color: #666;
-            line-height: 1.7; /* 줄간격 조정 */
-        }
-        
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-            padding: 0 25px 20px;
-        }
-        
-        .faq-icon {
-            transition: transform 0.3s ease;
-            color: #28a745;
-        }
-        
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-        
-        /* 최종 CTA */
-        .final-cta {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+        /* 혜택 섹션 */
+        .benefits {
             padding: 80px 20px;
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefits::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+        }
+        
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .benefit-item {
             text-align: center;
         }
         
-        .cta-content {
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover .benefit-icon {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .benefit-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        
+        .benefit-desc {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        /* 파트너사 */
+        .partners {
+            padding: 60px 20px;
+            background: var(--white);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .partners-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .partners-title {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            height: 40px;
+        }
+        
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* 상담 신청 섹션 */
+        .consultation {
+            padding: 80px 20px;
+            background: var(--light-gray);
+        }
+        
+        .consultation-container {
             max-width: 800px;
             margin: 0 auto;
         }
         
-        .cta-content h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
+        .consultation-form {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
         }
         
-        .cta-content p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .cta-benefits {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .cta-benefit {
-            text-align: center;
-        }
-        
-        .cta-benefit-number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #20c997;
-            margin-bottom: 5px;
-        }
-        
-        .cta-benefit-text {
-            font-size: 14px;
-            opacity: 0.9;
-            white-space: nowrap; /* 줄바꿈 방지 */
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 18px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
-        }
-        
-        .cta-button.secondary {
-            background: transparent;
-            border: 2px solid white;
-            box-shadow: none;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(40, 167, 69, 0.4);
-        }
-
-        /* 고객 후기 스타일 추가 */
-        .testimonials {
-            padding: 80px 20px;
-            background: #f8f9fa;
-        }
-        
-        .testimonial-grid {
+        .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-label {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        
+        .form-input {
+            padding: 14px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+        
+        .form-select {
+            padding: 14px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+        
+        .form-textarea {
+            padding: 14px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .form-checkbox input {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+        
+        .form-checkbox label {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+            cursor: pointer;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+        
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+        }
+        
+        /* 뉴스 & 공지사항 */
+        .news {
+            padding: 80px 20px;
+            background: var(--white);
+        }
+        
+        .news-container {
             max-width: 1200px;
             margin: 0 auto;
         }
         
-        .testimonial-card {
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        .news-tabs {
+            display: flex;
+            gap: 32px;
+            border-bottom: 2px solid var(--light-gray);
+            margin-bottom: 40px;
+        }
+        
+        .news-tab {
+            padding: 12px 0;
+            font-weight: 700;
+            color: var(--gray);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .news-tab.active {
+            color: var(--primary);
+        }
+        
+        .news-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .news-item {
             display: flex;
             flex-direction: column;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--light-gray);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        .news-item:hover {
+            transform: translateX(5px);
         }
         
-        .testimonial-header {
+        .news-date {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+        
+        .news-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .news-desc {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* 푸터 */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 60px 20px 30px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+        
+        .footer-brand p {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .footer-social {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+            gap: 16px;
         }
         
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            flex-shrink: 0;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
         
-        .author-info h4 {
-            color: #1e3c72;
-            margin-bottom: 5px;
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .footer-column h4 {
             font-size: 18px;
+            margin-bottom: 20px;
         }
         
-        .author-info p {
-            color: #666;
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .footer-link {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+        
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-copyright {
+            opacity: 0.6;
             font-size: 14px;
         }
         
-        .testimonial-rating {
-            color: #FFD700;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        
-        .testimonial-content {
-            margin-bottom: 20px;
-            flex-grow: 1; /* 내용이 달라도 카드 높이가 같도록 */
-        }
-        
-        .testimonial-content p {
-            color: #333;
-            line-height: 1.8;
-            font-size: 15px;
-        }
-        
-        .testimonial-footer {
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        
-        .contract-info {
-            color: #666;
-            font-size: 13px;
+        .footer-terms {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap; /* 모바일에서 줄바꿈 허용 */
+            gap: 24px;
         }
-
+        
+        .footer-terms a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.6;
+            font-size: 14px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-terms a:hover {
+            opacity: 1;
+        }
+        
         /* 반응형 */
         @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 40px; /* 간격 조정 */
-            }
-
-            .hero-benefits {
-                align-items: center; /* 가운데 정렬 */
+            .header-top {
+                display: none;
             }
             
-            .hero h1 {
-                font-size: 34px; /* 폰트 크기 조정 */
+            .nav-container {
+                height: 60px;
             }
-
-            .hero .subtitle {
+            
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: var(--white);
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 0;
+                transition: left 0.3s ease;
+                box-shadow: var(--shadow-lg);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                width: 100%;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 15px 0;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding: 0;
+                margin-left: 20px;
+            }
+            
+            .nav-cta {
+                margin-top: 20px;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                margin-top: 60px;
+                padding: 60px 15px;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
                 font-size: 18px;
             }
             
-            .trust-bar-content {
+            .hero-features {
                 flex-direction: column;
-                gap: 15px;
+                align-items: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .floating-card {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .services-grid,
+            .vehicles-grid,
+            .benefits-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .reviews-header {
+                flex-direction: column;
                 text-align: center;
             }
             
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .quick-form {
-                padding: 30px 25px;
-            }
-            
-            .section-header h2 {
-                font-size: 28px;
-            }
-
-            .section-header p {
-                font-size: 16px;
-            }
-
-            .calculator-grid {
-                grid-template-columns: 1fr;
-            }
-
-            /* 프로세스 모바일 대응 */
-            .process-timeline::before {
-                display: none;
-            }
-
-            .process-steps {
-                grid-template-columns: repeat(2, 1fr); /* 모바일에서는 2x2 그리드로 변경 */
-                gap: 40px 20px;
-            }
-            
-            .floating-cta {
-                right: 15px;
-                bottom: 15px;
-                padding: 12px 24px;
-                font-size: 15px;
-            }
-
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .testimonial-card {
-                padding: 25px;
-            }
-
-            .final-cta h2 {
-                font-size: 28px;
-            }
-
-            .final-cta p {
-                font-size: 16px;
-            }
-
-            .cta-benefits {
+            .review-stats {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
             }
-
-            .cta-button {
-                padding: 15px 30px;
+            
+            .stat-card {
+                padding: 20px;
+            }
+            
+            .stat-value {
+                font-size: 28px;
+            }
+            
+            .vehicle-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-line {
+                display: none;
+            }
+            
+            .consultation-form {
+                padding: 30px 20px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+                    @media (max-width: 480px) {
+                .faq-section .faq-question {
+                    font-size: 16px;
+                    padding: 18px 20px;
+                }
+            }
+            
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                padding: 14px 28px;
                 font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="trust-bar">
-        <div class="trust-bar-content">
-            <div class="trust-bar-item">
-                <span>✓</span>
-                <span>누적 계약 <strong>30,000건+</strong></span>
-            </div>
-            <div class="trust-bar-item">
-                <span>✓</span>
-                <span>고객 만족도 <strong>98%</strong></span>
-            </div>
-            <div class="trust-bar-item">
-                <span>✓</span>
-                <span>전문 컨설턴트 <strong>1:1 상담</strong></span>
+    <!-- 헤더 -->
+    <header class="header" id="header">
+        <!-- 헤더 상단 -->
+        <div class="header-top">
+            <div class="header-top-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>1599-0000</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>⏰</span>
+                        <span>평일 09:00 - 18:00</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <span>info@autoforest.co.kr</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" aria-label="네이버 블로그">블로그</a>
+                    <a href="#" aria-label="유튜브">유튜브</a>
+                    <a href="#" aria-label="인스타그램">인스타</a>
+                    <a href="#" aria-label="카카오톡">카톡</a>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <!-- 네비게이션 -->
+        <nav class="nav-wrapper">
+            <div class="nav-container">
+                <a href="#" class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                    🚗 오토포레스트
+                </a>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">서비스 소개</a>
+                        <div class="dropdown">
+                            <a href="#services" class="dropdown-item">장기렌트</a>
+                            <a href="#services" class="dropdown-item">오토리스</a>
+                            <a href="#services" class="dropdown-item">법인 전용</a>
+                            <a href="#services" class="dropdown-item">개인사업자 전용</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#vehicles" class="nav-link">차량 라인업</a>
+                        <div class="dropdown">
+                            <a href="#vehicles" class="dropdown-item" onclick="filterVehicles('domestic')">국산차</a>
+                            <a href="#vehicles" class="dropdown-item" onclick="filterVehicles('import')">수입차</a>
+                            <a href="#vehicles" class="dropdown-item" onclick="filterVehicles('electric')">전기차</a>
+                            <a href="#vehicles" class="dropdown-item" onclick="filterVehicles('ready')">즉시출고</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#faq" class="nav-link">고객센터</a>
+                        <div class="dropdown">
+                            <a href="#faq" class="dropdown-item">자주 묻는 질문</a>
+                            <a href="#process" class="dropdown-item">이용 가이드</a>
+                            <a href="#process" class="dropdown-item">계약 절차</a>
+                            <a href="#consultation" class="dropdown-item">AS 안내</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#reviews" class="nav-link">고객 후기</a>
+                        <div class="dropdown">
+                            <a href="https://auto-forest.github.io/review.github.io/" target="_blank" class="dropdown-item">후기 작성하기</a>
+                            <a href="#reviews" class="dropdown-item">출고 후기 보기</a>
+                            <a href="#" class="dropdown-item">베스트 후기</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">회사 소개</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#consultation" class="nav-cta">빠른 상담신청</a>
+                    </li>
+                </ul>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </div>
+        </nav>
+    </header>
     
-    <button class="floating-cta" onclick="scrollToForm()">
-        <span>📞</span>
-        <span>전문가 상담받기</span>
-    </button>
-    
+    <!-- 메인 히어로 섹션 -->
     <section class="hero">
-        <div class="container">
+        <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-text">
-                    <h1>개인·법인 맞춤형<br>오토리스 & 장기렌트</h1>
-                    <p class="subtitle">세금 절감과 비용 효율을 동시에 잡는 스마트한 선택</p>
-                    
-                    <div class="hero-benefits">
-                        <div class="hero-benefit">법인·개인사업자 비용처리 가능</div>
-                        <div class="hero-benefit">초기비용 부담 없는 운용리스 방식</div>
-                        <div class="hero-benefit">월 단위 고정 비용으로 예산 관리</div>
-                        <div class="hero-benefit">전담 컨설턴트 무료 상담 제공</div>
+                <h1>
+                    자동차 구매의 <span>새로운 기준</span><br>
+                    오토포레스트
+                </h1>
+                <p class="hero-subtitle">
+                    32,000개 기업이 선택한 국내 1위 자동차 금융 플랫폼<br>
+                    초기비용 0원, 비용처리 가능한 스마트한 차량 이용
+                </p>
+                
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <span class="hero-feature-icon">✓</span>
+                        <span>업계 최저가 보장</span>
+                    </div>
+                    <div class="hero-feature">
+                        <span class="hero-feature-icon">✓</span>
+                        <span>24시간 내 심사</span>
+                    </div>
+                    <div class="hero-feature">
+                        <span class="hero-feature-icon">✓</span>
+                        <span>전국 즉시출고</span>
                     </div>
                 </div>
                 
-                <div class="quick-form" id="consultation-form">
-                    <div class="form-header">
-                        <h2>1분 무료 견적 받기</h2>
-                        <p>전문 컨설턴트가 최적의 플랜을 제안해드립니다</p>
-                    </div>
-                    
-                    <form id="consultForm" onsubmit="handleSubmit(event)">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">성함/회사명 *</label>
-                                <input type="text" id="name" name="name" required placeholder="홍길동">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">연락처 *</label>
-                                <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" onkeyup="addHyphen(this)" maxlength="13">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group full-width">
-                            <label for="customer-type">고객 구분 *</label>
-                            <select id="customer-type" name="customer-type" required>
-                                <option value="">선택해주세요</option>
-                                <option value="개인">개인</option>
-                                <option value="법인">법인</option>
-                                <option value="개인사업자">개인사업자</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="vehicle-type">희망 차종</label>
-                                <input type="text" id="vehicle-type" name="vehicle-type" placeholder="예: 쏘나타, 그랜저, 벤츠 E클래스">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="period">이용 기간</label>
-                                <select id="period" name="period">
-                                    <option value="">선택해주세요</option>
-                                    <option value="12개월">12개월</option>
-                                    <option value="24개월">24개월</option>
-                                    <option value="36개월">36개월</option>
-                                    <option value="48개월">48개월</option>
-                                    <option value="60개월">60개월</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group full-width">
-                            <label for="purchase-type">구매 유형</label>
-                            <select id="purchase-type" name="purchase-type">
-                                <option value="">선택해주세요</option>
-                                <option value="장기렌트">장기렌트</option>
-                                <option value="오토리스">오토리스</option>
-                                <option value="무심사렌트">무심사렌트</option>
-                                <option value="상담후결정">상담 후 결정</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">
-                            무료 견적 받기
-                        </button>
-                    </form>
-                    
-                    <div class="form-footer">
-                        <p>상담 신청 시 <span class="highlight">맞춤형 차량 이용 방안</span>을 함께 안내해드립니다</p>
-                    </div>
+                <div class="hero-buttons">
+                    <a href="#consultation" class="btn-primary">
+                        <span>무료 견적받기</span>
+                        <span>→</span>
+                    </a>
+                    <a href="#vehicles" class="btn-secondary">
+                        차량 둘러보기
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="floating-card top-right">
+                    <div class="stat-number">32,847</div>
+                    <div class="stat-label">누적 계약건수</div>
+                </div>
+                <div class="floating-card bottom-left">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">고객 만족도</div>
+                </div>
+                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #e5e7eb 0%, #f3f4f6 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 80px; color: #d1d5db;">
+                    🚗
                 </div>
             </div>
         </div>
     </section>
     
-    <section class="customer-types">
-        <div class="container">
-            <div class="section-header">
-                <h2>고객님께 딱 맞는 솔루션을 제공합니다</h2>
-                <p>개인, 법인, 개인사업자 모두를 위한 맞춤형 서비스</p>
-            </div>
-            
-            <div class="type-cards">
-                <div class="type-card" onclick="scrollToForm()">
-                    <div class="type-icon">👔</div>
-                    <h3>개인 고객</h3>
-                    <p>직장인, 전문직 종사자를 위한 스마트한 차량 이용 방법</p>
-                    <ul class="type-features">
-                        <li>초기 비용 부담 없음</li>
-                        <li>신용등급 영향 최소화</li>
-                        <li>월 고정 비용으로 예산 관리</li>
-                        <li>보험료, 세금 모두 포함</li>
-                    </ul>
-                </div>
-                
-                <div class="type-card" onclick="scrollToForm()">
-                    <div class="type-icon">🏢</div>
-                    <h3>법인 사업자</h3>
-                    <p>법인 차량 운영의 효율성을 높이는 스마트한 선택</p>
-                    <ul class="type-features">
-                        <li>렌탈료 손금(비용) 처리</li>
-                        <li>부채비율 개선 효과</li>
-                        <li>자산 취득 부담 없음</li>
-                        <li>전담 컨설턴트 지원</li>
-                    </ul>
-                </div>
-                
-                <div class="type-card" onclick="scrollToForm()">
-                    <div class="type-icon">💼</div>
-                    <h3>개인 사업자</h3>
-                    <p>사업 운영에 최적화된 차량 이용 방법</p>
-                    <ul class="type-features">
-                        <li>사업 경비 처리 가능</li>
-                        <li>초기 투자 비용 절감</li>
-                        <li>사업용 자동차 보험 적용</li>
-                        <li>유연한 계약 조건</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- 서비스 섹션 -->
+    <section class="services" id="services">
+    <section class="services">
+        <div class="section-header">
+            <div class="section-label">Our Services</div>
+            <h2 class="section-title">맞춤형 자동차 금융 서비스</h2>
+            <p class="section-desc">
+                고객님의 상황에 가장 적합한 상품을 추천해드립니다
+            </p>
         </div>
-    </section>
-    
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>고객님들의 생생한 이용 후기</h2>
-                <p>오토포레스트와 함께한 분들의 진솔한 이야기</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🚙</div>
+                <h3 class="service-title">장기렌트</h3>
+                <p class="service-desc">
+                    보험료, 자동차세 모두 포함된 합리적인 선택. 사고처리 걱정 없이 편안한 차량 이용
+                </p>
+                <a href="#" class="service-link">
+                    자세히 보기 →
+                </a>
             </div>
             
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-author">
-                            <div class="author-avatar">최</div>
-                            <div class="author-info">
-                                <h4>최재현 대표님</h4>
-                                <p>IT 컨설팅 법인 / 제네시스 G90 이용 중</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-rating">★★★★★</div>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"벤츠 S클래스에서 제네시스 G90으로 변경했는데, 오히려 더 만족스럽습니다. 
-                        무엇보다 담당 컨설턴트분이 저희 회사 상황을 정확히 파악하고 최적의 조건을 
-                        제시해주셨어요. 초기 자금 부담 없이 최고급 차량을 이용할 수 있고, 
-                        매달 비용 처리가 깔끔해서 회계팀에서도 좋아합니다. 특히 차량 관리나 
-                        보험 처리 같은 번거로운 일들을 신경 쓸 필요가 없어 업무에만 집중할 수 있게 되었습니다."</p>
-                    </div>
-                    <div class="testimonial-footer">
-                        <span class="contract-info">📅 계약 기간: 36개월 | 🚗 3대 운용 중</span>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-author">
-                            <div class="author-avatar">김</div>
-                            <div class="author-info">
-                                <h4>김은정 원장님</h4>
-                                <p>성형외과 운영 / BMW 5시리즈 이용 중</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-rating">★★★★★</div>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"의료업 특성상 신뢰감 있는 차량이 필요했는데, BMW 5시리즈가 딱 맞았습니다. 
-                        차량 구매를 고민했지만, 감가상각이나 중고차 처분 걱정 없이 항상 새 차를 
-                        탈 수 있다는 점이 큰 메리트였어요. 오토포레스트는 다른 업체들과 달리 
-                        정말 투명하게 모든 조건을 설명해주시고, 숨겨진 비용이 전혀 없었습니다. 
-                        직원들 차량도 단체로 계약했는데, 복지 차원에서도 아주 만족스럽습니다."</p>
-                    </div>
-                    <div class="testimonial-footer">
-                        <span class="contract-info">📅 계약 기간: 48개월 | 🚗 5대 운용 중</span>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-author">
-                            <div class="author-avatar">박</div>
-                            <div class="author-info">
-                                <h4>박상훈 변호사님</h4>
-                                <p>법무법인 파트너 / 벤츠 E클래스 이용 중</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-rating">★★★★★</div>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"개인 자격으로 차량을 이용하고 있는데, 번거로운 차량 관리에서 해방된 것이 
-                        가장 큰 장점입니다. 정기점검, 보험갱신, 자동차세 등 신경 쓸 일이 하나도 없어요. 
-                        특히 해외 출장이 잦은 저로서는 차량 관리를 맡길 수 있다는 점이 정말 편리합니다. 
-                        계약 만료가 다가오는데 차량을 업그레이드해서 재계약할 예정입니다. 
-                        서비스 품질이 기대 이상이어서 주변 동료들에게도 적극 추천하고 있습니다."</p>
-                    </div>
-                    <div class="testimonial-footer">
-                        <span class="contract-info">📅 계약 기간: 24개월 | 🚗 재계약 예정</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="process">
-        <div class="container">
-            <div class="section-header">
-                <h2>간편한 진행 절차</h2>
-                <p>복잡한 과정 없이 빠르고 편리하게</p>
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3 class="service-title">오토리스</h3>
+                <p class="service-desc">
+                    법인·개인사업자 100% 비용처리 가능. 절세 효과와 함께 사업 운영비 절감
+                </p>
+                <a href="#" class="service-link">
+                    자세히 보기 →
+                </a>
             </div>
             
-            <div class="process-timeline">
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-icon active">1</div>
-                        <h3 class="step-title">상담 신청</h3>
-                        <p class="step-description">온라인으로 간편하게<br>1분 내 신청 완료</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-icon">2</div>
-                        <h3 class="step-title">맞춤 견적</h3>
-                        <p class="step-description">전문가가 직접<br>최적의 플랜 제안</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-icon">3</div>
-                        <h3 class="step-title">계약 진행</h3>
-                        <p class="step-description">필요 서류 최소화<br>빠른 심사 진행</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-icon">4</div>
-                        <h3 class="step-title">차량 인도</h3>
-                        <p class="step-description">전국 어디서나<br>편리한 탁송 서비스</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="faq">
-        <div class="container">
-            <div class="section-header">
-                <h2>자주 묻는 질문</h2>
-                <p>궁금하신 점을 빠르게 해결해드립니다</p>
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3 class="service-title">즉시출고</h3>
+                <p class="service-desc">
+                    재고 보유 차량 3일 내 출고 가능. 급하게 차량이 필요한 분들을 위한 특급 서비스
+                </p>
+                <a href="#" class="service-link">
+                    자세히 보기 →
+                </a>
             </div>
             
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>장기렌트와 오토리스의 차이점은 무엇인가요?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>장기렌트는 개인/법인 모두 이용 가능하며 번호판이 '하,허,호'로 시작합니다. 
-                        오토리스는 주로 법인이 이용하며 일반 번호판을 사용할 수 있습니다. 
-                        세금 처리 방식과 회계 처리에서도 차이가 있어, 고객님의 상황에 맞는 상품을 추천해드립니다.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>법인 차량 비용처리는 어떻게 되나요?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>오토리스나 장기렌트 이용 시 월 렌탈료를 회계상 비용으로 처리할 수 있습니다. 
-                        구체적인 세무 처리 방법은 고객사의 세무사나 회계사와 상의하시는 것을 권장드리며, 
-                        저희 전문 컨설턴트가 일반적인 처리 방법을 안내해드립니다.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>보험사고가 나면 어떻게 되나요?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>렌탈료에 자차보험이 포함되어 있어 안심하실 수 있습니다. 
-                        사고 발생 시 전담 직원이 처리를 도와드리며, 
-                        개인 보험료 할증 걱정 없이 이용하실 수 있습니다.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>계약 기간 중 차량 변경이 가능한가요?</span>
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>일정 기간 이용 후 차량 변경이 가능합니다. 
-                        가족 구성원 변화나 업무 환경 변화에 따라 
-                        더 적합한 차량으로 변경을 도와드립니다.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="final-cta">
-        <div class="cta-content">
-            <h2>지금 시작하면 누릴 수 있는 혜택</h2>
-            <p>매달 한정된 프로모션을 놓치지 마세요</p>
-            
-            <div class="cta-benefits">
-                <div class="cta-benefit">
-                    <div class="cta-benefit-number">3일</div>
-                    <div class="cta-benefit-text">초스피드 출고</div>
-                </div>
-                <div class="cta-benefit">
-                    <div class="cta-benefit-number">24시간</div>
-                    <div class="cta-benefit-text">심사 완료</div>
-                </div>
-                <div class="cta-benefit">
-                    <div class="cta-benefit-number">0원</div>
-                    <div class="cta-benefit-text">초기 비용</div>
-                </div>
-            </div>
-            
-            <div class="cta-buttons">
-                <a href="#consultation-form" class="cta-button" onclick="scrollToForm()">
-                    지금 바로 상담 신청
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3 class="service-title">법인 전용</h3>
+                <p class="service-desc">
+                    대량 계약 특별 할인과 전담 매니저 배정. 기업 맞춤형 차량 관리 솔루션
+                </p>
+                <a href="#" class="service-link">
+                    자세히 보기 →
                 </a>
             </div>
         </div>
     </section>
     
+    <!-- 차량 라인업 -->
+    <section class="vehicles" id="vehicles">
+        <div class="section-header">
+            <div class="section-label">Vehicle Lineup</div>
+            <h2 class="section-title">다양한 차량 라인업</h2>
+            <p class="section-desc">
+                국산차부터 수입차까지, 원하는 모든 차량을 만나보세요
+            </p>
+        </div>
+        
+        <div class="vehicle-tabs">
+            <div class="vehicle-tab active">전체</div>
+            <div class="vehicle-tab">국산차</div>
+            <div class="vehicle-tab">수입차</div>
+            <div class="vehicle-tab">전기차</div>
+            <div class="vehicle-tab">SUV</div>
+        </div>
+        
+        <div class="vehicles-grid">
+            <div class="vehicle-card">
+                <div class="vehicle-image">🚗</div>
+                <div class="vehicle-content">
+                    <div class="vehicle-brand">현대</div>
+                    <h3 class="vehicle-name">그랜저 IG</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <span>⛽</span>
+                            <span>가솔린</span>
+                        </div>
+                        <div class="vehicle-feature">
+                            <span>👥</span>
+                            <span>5인승</span>
+                        </div>
+                    </div>
+                    <div class="vehicle-price">
+                        <span class="price-label">월</span>
+                        <span class="price-amount">55만원</span>
+                        <span class="price-unit">부터</span>
+                    </div>
+                    <button class="vehicle-btn">견적 확인하기</button>
+                </div>
+            </div>
+            
+            <div class="vehicle-card">
+                <div class="vehicle-image">🚙</div>
+                <div class="vehicle-content">
+                    <div class="vehicle-brand">기아</div>
+                    <h3 class="vehicle-name">쏘렌토 MQ4</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <span>⛽</span>
+                            <span>디젤</span>
+                        </div>
+                        <div class="vehicle-feature">
+                            <span>👥</span>
+                            <span>7인승</span>
+                        </div>
+                    </div>
+                    <div class="vehicle-price">
+                        <span class="price-label">월</span>
+                        <span class="price-amount">65만원</span>
+                        <span class="price-unit">부터</span>
+                    </div>
+                    <button class="vehicle-btn">견적 확인하기</button>
+                </div>
+            </div>
+            
+            <div class="vehicle-card">
+                <div class="vehicle-image">⚡</div>
+                <div class="vehicle-content">
+                    <div class="vehicle-brand">테슬라</div>
+                    <h3 class="vehicle-name">Model 3</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <span>🔋</span>
+                            <span>전기</span>
+                        </div>
+                        <div class="vehicle-feature">
+                            <span>👥</span>
+                            <span>5인승</span>
+                        </div>
+                    </div>
+                    <div class="vehicle-price">
+                        <span class="price-label">월</span>
+                        <span class="price-amount">75만원</span>
+                        <span class="price-unit">부터</span>
+                    </div>
+                    <button class="vehicle-btn">견적 확인하기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 프로세스 -->
+    <section class="process">
+        <div class="section-header">
+            <div class="section-label">Process</div>
+            <h2 class="section-title">간단한 4단계 프로세스</h2>
+            <p class="section-desc">
+                복잡한 절차 없이 빠르고 편리하게 진행됩니다
+            </p>
+        </div>
+        
+        <div class="process-timeline">
+            <div class="process-line"></div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-icon">
+                        📝
+                        <span class="step-number">1</span>
+                    </div>
+                    <h3 class="step-title">상담 신청</h3>
+                    <p class="step-desc">
+                        온라인으로 간편하게<br>
+                        1분 내 신청 완료
+                    </p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-icon">
+                        💬
+                        <span class="step-number">2</span>
+                    </div>
+                    <h3 class="step-title">전문 상담</h3>
+                    <p class="step-desc">
+                        전문가가 맞춤형<br>
+                        최적 조건 제안
+                    </p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-icon">
+                        ✅
+                        <span class="step-number">3</span>
+                    </div>
+                    <h3 class="step-title">계약 진행</h3>
+                    <p class="step-desc">
+                        모바일로 편리하게<br>
+                        비대면 계약 가능
+                    </p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-icon">
+                        🚗
+                        <span class="step-number">4</span>
+                    </div>
+                    <h3 class="step-title">차량 인도</h3>
+                    <p class="step-desc">
+                        원하는 장소에서<br>
+                        편리하게 인수
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 고객 후기 -->
+    <section class="reviews" id="reviews">
+        <div class="reviews-header">
+            <div class="reviews-title-group">
+                <div class="section-label">Customer Reviews</div>
+                <h2 class="section-title">실제 고객님들의 출고 후기</h2>
+                <p class="section-desc">
+                    32,847명의 고객님이 남겨주신 생생한 경험을 확인해보세요
+                </p>
+            </div>
+            <a href="https://auto-forest.github.io/review.github.io/" target="_blank" class="write-review-btn">
+                <span>✍️</span>
+                <span>후기 작성하기</span>
+            </a>
+        </div>
+        
+        <div class="review-stats">
+            <div class="stat-card">
+                <div class="stat-value">4.9</div>
+                <div class="stat-label">평균 평점</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8,547</div>
+                <div class="stat-label">전체 후기</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">추천율</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">24시간</div>
+                <div class="stat-label">평균 답변시간</div>
+            </div>
+        </div>
+        
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-badge">베스트 후기</div>
+                <div class="review-header">
+                    <div class="review-avatar">김</div>
+                    <div class="review-info">
+                        <div class="review-name">김민수 고객님</div>
+                        <div class="review-car">2024 그랜저 IG 하이브리드</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-content">
+                    정말 만족스러운 계약이었습니다! 상담사분께서 친절하게 여러 옵션을 비교해주셔서 제게 가장 적합한 조건을 찾을 수 있었어요. 타사 대비 월 8만원이나 저렴했고, 출고도 일주일 만에 완료되었습니다. 특히 보험료와 세금이 모두 포함된 가격이라 추가 부담이 없어서 좋았습니다.
+                </div>
+                <div class="review-images">
+                    <div class="review-image">📸</div>
+                    <div class="review-image">📸</div>
+                    <div class="review-image">📸</div>
+                </div>
+                <div class="review-footer">
+                    <span class="review-date">2025년 1월 20일</span>
+                    <span class="review-helpful">👍 도움이 됐어요 (234)</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">이</div>
+                    <div class="review-info">
+                        <div class="review-name">이정희 고객님</div>
+                        <div class="review-car">2024 쏘렌토 MQ4</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-content">
+                    개인사업자인데 절세 컨설팅까지 받을 수 있어서 정말 좋았습니다. 처음엔 복잡할 줄 알았는데 담당자분이 하나하나 설명해주셔서 쉽게 이해할 수 있었어요. 계약 후에도 지속적으로 관리해주시는 점이 인상적입니다. 주변에도 많이 추천하고 있어요!
+                </div>
+                <div class="review-images">
+                    <div class="review-image">📸</div>
+                    <div class="review-image">📸</div>
+                </div>
+                <div class="review-footer">
+                    <span class="review-date">2025년 1월 18일</span>
+                    <span class="review-helpful">👍 도움이 됐어요 (189)</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">박</div>
+                    <div class="review-info">
+                        <div class="review-name">박준영 고객님</div>
+                        <div class="review-car">2025 아반떼 CN7</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-content">
+                    신용등급 걱정 없이 신차를 탈 수 있어서 정말 좋았습니다. 대출과 달리 신용에 영향이 없다는 점이 가장 마음에 들었어요. 월 납입금에 모든 비용이 포함되어 있어서 예산 관리가 편해졌습니다. 다음 차도 꼭 여기서 계약할 예정입니다.
+                </div>
+                <div class="review-footer">
+                    <span class="review-date">2025년 1월 15일</span>
+                    <span class="review-helpful">👍 도움이 됐어요 (156)</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-badge">사진 후기</div>
+                <div class="review-header">
+                    <div class="review-avatar">최</div>
+                    <div class="review-info">
+                        <div class="review-name">최서연 고객님</div>
+                        <div class="review-car">2024 아이오닉 5</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-content">
+                    전기차 구매를 고민하다가 리스로 먼저 경험해보기로 했는데 탁월한 선택이었어요! 충전 인프라나 배터리 걱정 없이 편하게 이용할 수 있어서 좋습니다. 상담사님이 전기차 보조금까지 꼼꼼히 챙겨주셨어요.
+                </div>
+                <div class="review-images">
+                    <div class="review-image">📸</div>
+                    <div class="review-image">📸</div>
+                    <div class="review-image">📸</div>
+                    <div class="review-image">📸</div>
+                </div>
+                <div class="review-footer">
+                    <span class="review-date">2025년 1월 12일</span>
+                    <span class="review-helpful">👍 도움이 됐어요 (201)</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">강</div>
+                    <div class="review-info">
+                        <div class="review-name">강동원 고객님</div>
+                        <div class="review-car">2024 G70</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★☆</div>
+                <div class="review-content">
+                    법인 차량으로 계약했는데 절차가 간단해서 놀랐습니다. 필요한 서류만 준비하면 나머지는 담당자분이 다 처리해주셨어요. 가격도 합리적이고 서비스도 만족스럽습니다. 한 가지 아쉬운 점은 원하는 색상이 재고에 없어서 기다려야 했다는 것 정도네요.
+                </div>
+                <div class="review-footer">
+                    <span class="review-date">2025년 1월 10일</span>
+                    <span class="review-helpful">👍 도움이 됐어요 (123)</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">송</div>
+                    <div class="review-info">
+                        <div class="review-name">송미영 고객님</div>
+                        <div class="review-car">2024 셀토스</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-content">
+                    첫 차 구매라 많이 긴장했는데, 상담사님께서 초보자도 이해하기 쉽게 설명해주셔서 감사했습니다. 보험 처리나 사고 대응까지 모두 맡아주신다니 정말 든든해요. 월 납입금도 부담스럽지 않아서 만족합니다!
+                </div>
+                <div class="review-footer">
+                    <span class="review-date">2025년 1월 8일</span>
+                    <span class="review-helpful">👍 도움이 됐어요 (167)</span>
+                </div>
+            </div>
+        </div>
+        
+        <button class="load-more-btn" onclick="alert('더 많은 후기를 보시려면 후기 페이지를 방문해주세요!')">
+            더 많은 후기 보기
+        </button>
+    </section>
+    
+    <!-- 혜택 섹션 -->
+    <section class="benefits">
+        <div class="benefits-container">
+            <div class="section-header" style="color: white;">
+                <div class="section-label">Why Choose Us</div>
+                <h2 class="section-title" style="color: white;">오토포레스트만의 특별한 혜택</h2>
+                <p class="section-desc" style="color: rgba(255,255,255,0.8);">
+                    고객님께 최고의 가치를 제공하기 위한 약속입니다
+                </p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">💰</div>
+                    <h3 class="benefit-title">최저가 보장제</h3>
+                    <p class="benefit-desc">
+                        타사 대비 비싸면 차액의 200% 보상<br>
+                        업계 최고의 가격 경쟁력
+                    </p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3 class="benefit-title">올케어 서비스</h3>
+                    <p class="benefit-desc">
+                        정비, 보험, 사고처리까지<br>
+                        모든 관리를 한번에
+                    </p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">📊</div>
+                    <h3 class="benefit-title">절세 컨설팅</h3>
+                    <p class="benefit-desc">
+                        세무 전문가의 1:1 상담<br>
+                        최대 절세 효과 실현
+                    </p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚀</div>
+                    <h3 class="benefit-title">빠른 심사</h3>
+                    <p class="benefit-desc">
+                        신청 후 24시간 내 결과 안내<br>
+                        업계 최단 시간 승인
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 파트너사 -->
+    <section class="partners">
+        <div class="partners-container">
+            <h3 class="partners-title">5,000개 이상의 기업이 오토포레스트와 함께합니다</h3>
+            <div class="partners-grid">
+                <div class="partner-logo" style="background: #f3f4f6; height: 40px; border-radius: 8px;"></div>
+                <div class="partner-logo" style="background: #f3f4f6; height: 40px; border-radius: 8px;"></div>
+                <div class="partner-logo" style="background: #f3f4f6; height: 40px; border-radius: 8px;"></div>
+                <div class="partner-logo" style="background: #f3f4f6; height: 40px; border-radius: 8px;"></div>
+                <div class="partner-logo" style="background: #f3f4f6; height: 40px; border-radius: 8px;"></div>
+                <div class="partner-logo" style="background: #f3f4f6; height: 40px; border-radius: 8px;"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 상담 신청 -->
+    <section class="consultation" id="consultation">
+        <div class="consultation-container">
+            <div class="section-header">
+                <div class="section-label">Contact Us</div>
+                <h2 class="section-title">무료 상담 신청</h2>
+                <p class="section-desc">
+                    전문가가 최적의 조건을 찾아드립니다
+                </p>
+            </div>
+            
+            <form class="consultation-form" id="consultationForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">성함/회사명 *</label>
+                        <input type="text" class="form-input" required placeholder="홍길동">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">연락처 *</label>
+                        <input type="tel" class="form-input" required placeholder="010-1234-5678">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">이메일</label>
+                        <input type="email" class="form-input" placeholder="example@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">고객 구분 *</label>
+                        <select class="form-select" required>
+                            <option value="">선택해주세요</option>
+                            <option value="개인">개인</option>
+                            <option value="개인사업자">개인사업자</option>
+                            <option value="법인">법인</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">희망 차종</label>
+                        <select class="form-select">
+                            <option value="">전체</option>
+                            <option value="경차">경차</option>
+                            <option value="소형">소형</option>
+                            <option value="준중형">준중형</option>
+                            <option value="중형">중형</option>
+                            <option value="대형">대형</option>
+                            <option value="SUV">SUV</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">계약 기간</label>
+                        <select class="form-select">
+                            <option value="">선택해주세요</option>
+                            <option value="12개월">12개월</option>
+                            <option value="24개월">24개월</option>
+                            <option value="36개월">36개월</option>
+                            <option value="48개월">48개월</option>
+                            <option value="60개월">60개월</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">문의사항</label>
+                    <textarea class="form-textarea" placeholder="궁금하신 점이나 특별한 요청사항을 입력해주세요"></textarea>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="privacy" required>
+                    <label for="privacy">
+                        개인정보 수집 및 이용에 동의합니다. 수집된 정보는 상담 목적으로만 사용되며, 관련 법령에 따라 안전하게 관리됩니다.
+                    </label>
+                </div>
+                
+                <button type="submit" class="form-submit">
+                    무료 상담 신청하기
+                </button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- 후기 작성 유도 배너 -->
+    <section style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 40px 20px; text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h3 style="font-size: 28px; font-weight: 800; color: #92400e; margin-bottom: 16px;">
+                🎉 출고 완료하셨나요?
+            </h3>
+            <p style="font-size: 18px; color: #92400e; margin-bottom: 24px;">
+                소중한 후기를 남겨주시면 다음 계약 시 할인 혜택을 드립니다!
+            </p>
+            <a href="https://auto-forest.github.io/review.github.io/" target="_blank" 
+               style="display: inline-block; background: #92400e; color: white; padding: 16px 40px; 
+                      border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px;
+                      transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(146, 64, 14, 0.3);"
+               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(146, 64, 14, 0.4)'"
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(146, 64, 14, 0.3)'">
+                후기 작성하고 혜택 받기 →
+            </a>
+        </div>
+    </section>
+    
+    <!-- FAQ 섹션 -->
+    <section class="faq-section" id="faq" style="padding: 80px 20px; background: #f9fafb;">
+        <div class="section-header">
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">자주 묻는 질문</h2>
+            <p class="section-desc">
+                고객님들이 가장 궁금해하시는 내용을 정리했습니다
+            </p>
+        </div>
+        
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-item" style="background: white; margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <div class="faq-question" onclick="toggleFaq(this)" style="padding: 24px 30px; font-weight: 700; font-size: 18px; color: var(--dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
+                    <span>장기렌트와 리스의 차이점은 무엇인가요?</span>
+                    <span class="faq-toggle" style="font-size: 24px; color: var(--primary); transition: transform 0.3s ease;">+</span>
+                </div>
+                <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="padding: 0 30px 24px; color: #6b7280; line-height: 1.8;">
+                        장기렌트는 번호판에 '하,허,호'가 표시되며 보험료가 포함되어 있습니다. 리스는 일반 번호판을 사용하며 보험은 별도 가입해야 합니다. 법인/개인사업자는 두 상품 모두 비용처리가 가능합니다.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" style="background: white; margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <div class="faq-question" onclick="toggleFaq(this)" style="padding: 24px 30px; font-weight: 700; font-size: 18px; color: var(--dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
+                    <span>신용등급이 낮아도 가능한가요?</span>
+                    <span class="faq-toggle" style="font-size: 24px; color: var(--primary); transition: transform 0.3s ease;">+</span>
+                </div>
+                <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="padding: 0 30px 24px; color: #6b7280; line-height: 1.8;">
+                        네, 가능합니다. 장기렌트는 대출이 아니기 때문에 신용등급에 영향을 주지 않으며, 다양한 심사 기준을 통해 승인 가능성을 높였습니다. 상담을 통해 정확한 조건을 확인해보세요.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" style="background: white; margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <div class="faq-question" onclick="toggleFaq(this)" style="padding: 24px 30px; font-weight: 700; font-size: 18px; color: var(--dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
+                    <span>계약 기간 중 차량 변경이 가능한가요?</span>
+                    <span class="faq-toggle" style="font-size: 24px; color: var(--primary); transition: transform 0.3s ease;">+</span>
+                </div>
+                <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="padding: 0 30px 24px; color: #6b7280; line-height: 1.8;">
+                        계약 기간 중 차량 변경은 제한적으로 가능합니다. 승계나 조기 종료 후 재계약 등의 방법이 있으며, 상황에 따라 추가 비용이 발생할 수 있습니다. 자세한 내용은 상담을 통해 안내받으실 수 있습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 회사 소개 섹션 -->
+    <section class="about-section" id="about" style="padding: 80px 20px; background: white;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header">
+                <div class="section-label">About Us</div>
+                <h2 class="section-title">오토포레스트를 소개합니다</h2>
+                <p class="section-desc">
+                    고객의 성공적인 자동차 생활을 위한 최고의 파트너
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 60px;">
+                <div>
+                    <h3 style="font-size: 32px; font-weight: 800; color: var(--dark); margin-bottom: 24px;">
+                        대한민국 No.1<br>자동차 금융 전문기업
+                    </h3>
+                    <p style="font-size: 18px; line-height: 1.8; color: #6b7280; margin-bottom: 32px;">
+                        오토포레스트는 2015년 설립 이래 32,000건 이상의 계약을 성사시키며 
+                        업계 최고의 전문성과 서비스로 고객님들의 신뢰를 받아왔습니다.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px;">
+                        <div style="padding: 24px; background: #f9fafb; border-radius: 12px;">
+                            <div style="font-size: 36px; font-weight: 900; color: var(--primary); margin-bottom: 8px;">10년</div>
+                            <div style="color: #6b7280;">업계 경력</div>
+                        </div>
+                        <div style="padding: 24px; background: #f9fafb; border-radius: 12px;">
+                            <div style="font-size: 36px; font-weight: 900; color: var(--primary); margin-bottom: 8px;">150명+</div>
+                            <div style="color: #6b7280;">전문 컨설턴트</div>
+                        </div>
+                        <div style="padding: 24px; background: #f9fafb; border-radius: 12px;">
+                            <div style="font-size: 36px; font-weight: 900; color: var(--primary); margin-bottom: 8px;">50개+</div>
+                            <div style="color: #6b7280;">제휴 금융사</div>
+                        </div>
+                        <div style="padding: 24px; background: #f9fafb; border-radius: 12px;">
+                            <div style="font-size: 36px; font-weight: 900; color: var(--primary); margin-bottom: 8px;">24/7</div>
+                            <div style="color: #6b7280;">고객 지원</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: linear-gradient(135deg, #e5e7eb 0%, #f3f4f6 100%); height: 500px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 80px; color: #d1d5db;">
+                    🏢
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 뉴스 & 공지사항 -->
+    <section class="news">
+        <div class="news-container">
+            <div class="section-header" style="text-align: left;">
+                <h2 class="section-title">새소식</h2>
+            </div>
+            
+            <div class="news-tabs">
+                <div class="news-tab active">공지사항</div>
+                <div class="news-tab">보도자료</div>
+                <div class="news-tab">이벤트</div>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-date">2025.01.15</div>
+                    <h3 class="news-title">2월 한정 특별 프로모션 안내</h3>
+                    <p class="news-desc">신규 고객 대상 특별 할인 혜택을 준비했습니다. 이번 기회를 놓치지 마세요.</p>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-date">2025.01.10</div>
+                    <h3 class="news-title">전기차 전용 상품 출시</h3>
+                    <p class="news-desc">친환경 차량을 위한 맞춤형 금융 상품을 새롭게 선보입니다.</p>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-date">2025.01.05</div>
+                    <h3 class="news-title">모바일 앱 업데이트 안내</h3>
+                    <p class="news-desc">더욱 편리해진 모바일 서비스를 경험해보세요. 실시간 견적 확인이 가능합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>🚗 오토포레스트</h3>
+                    <p>
+                        대한민국 No.1 자동차 금융 플랫폼<br>
+                        고객님의 성공적인 차량 운영을 위한 최고의 파트너
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon" aria-label="페이스북">f</a>
+                        <a href="#" class="social-icon" aria-label="인스타그램">📷</a>
+                        <a href="#" class="social-icon" aria-label="유튜브">▶️</a>
+                        <a href="#" class="social-icon" aria-label="네이버">N</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>서비스</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">장기렌트</a>
+                        <a href="#" class="footer-link">오토리스</a>
+                        <a href="#" class="footer-link">법인 상품</a>
+                        <a href="#" class="footer-link">즉시출고</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>고객지원</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">자주 묻는 질문</a>
+                        <a href="#" class="footer-link">이용가이드</a>
+                        <a href="#" class="footer-link">계약서류 안내</a>
+                        <a href="https://auto-forest.github.io/review.github.io/" target="_blank" class="footer-link">고객 후기 작성</a>
+                        <a href="#reviews" class="footer-link">고객 후기 보기</a>
+                        <a href="#" class="footer-link">AS 센터</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>회사정보</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">회사소개</a>
+                        <a href="#" class="footer-link">인재채용</a>
+                        <a href="#" class="footer-link">제휴문의</a>
+                        <a href="#" class="footer-link">오시는 길</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 오토포레스트. All rights reserved. | 사업자등록번호: 123-45-67890
+                </div>
+                <div class="footer-terms">
+                    <a href="#">이용약관</a>
+                    <a href="#">개인정보처리방침</a>
+                    <a href="#">이메일무단수집거부</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
     <script>
-        // 스크립트는 기존과 동일하게 유지됩니다.
-        async function handleSubmit(event) {
-            event.preventDefault();
+        // 모바일 메뉴 토글
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+            this.textContent = this.textContent === '☰' ? '✕' : '☰';
+        });
+        
+        // 스크롤 시 헤더 스타일 변경
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // FAQ 토글 함수
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const toggle = element.querySelector('.faq-toggle');
             
-            const submitBtn = event.target.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = '제출 중...';
-            submitBtn.disabled = true;
-            
-            const formData = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                customerType: document.getElementById('customer-type').value,
-                vehicleType: document.getElementById('vehicle-type').value,
-                period: document.getElementById('period').value,
-                purchaseType: document.getElementById('purchase-type').value
-            };
-            
-            try {
-                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwM9DSb_lGuJihfYij26LoxcKtjvuM4b5KH8WFGdTzelXv2-NBQ_lBNGndwJ-JIzQMT/exec';
-                
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-                
-                alert('상담 신청이 완료되었습니다!\n전문 컨설턴트가 빠른 시일 내에 연락드리겠습니다.');
-                event.target.reset();
-                
-            } catch (error) {
-                console.error('Error:', error);
-                alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+            if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                answer.style.maxHeight = '0';
+                toggle.style.transform = 'rotate(0deg)';
+                element.style.background = 'white';
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                toggle.style.transform = 'rotate(45deg)';
+                element.style.background = '#f9fafb';
             }
         }
         
-        function toggleFAQ(element) {
-            const faqItem = element.parentElement;
-            faqItem.classList.toggle('active');
+        // 차량 필터링 함수
+        function filterVehicles(type) {
+            // 차량 섹션으로 스크롤
+            document.getElementById('vehicles').scrollIntoView({ behavior: 'smooth' });
+            
+            // 탭 활성화
+            const tabs = document.querySelectorAll('.vehicle-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // 필터에 맞는 탭 활성화
+            switch(type) {
+                case 'domestic':
+                    tabs[1].classList.add('active');
+                    break;
+                case 'import':
+                    tabs[2].classList.add('active');
+                    break;
+                case 'electric':
+                    tabs[3].classList.add('active');
+                    break;
+                case 'ready':
+                    alert('즉시 출고 가능한 차량을 보여드립니다.');
+                    break;
+            }
         }
         
-        function scrollToForm() {
-            document.getElementById('consultation-form').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'center'
+        // 모바일 메뉴 클릭 시 자동 닫기
+        document.querySelectorAll('.nav-link, .dropdown-item').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    document.getElementById('navMenu').classList.remove('active');
+                    document.getElementById('mobileMenuBtn').textContent = '☰';
+                }
             });
-        }
+        });
+        
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // 폼 제출 처리
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.');
+            this.reset();
+        });
+        
+        // 전화번호 자동 하이픈
+        document.querySelector('input[type="tel"]').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^0-9]/g, '');
+            let formattedValue = '';
+            
+            if (value.length <= 3) {
+                formattedValue = value;
+            } else if (value.length <= 7) {
+                formattedValue = value.slice(0, 3) + '-' + value.slice(3);
+            } else if (value.length <= 11) {
+                formattedValue = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
+            }
+            
+            e.target.value = formattedValue;
+        });
+        
+        // AOS 같은 스크롤 애니메이션 효과
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // 애니메이션 적용할 요소들
+        document.querySelectorAll('.service-card, .vehicle-card, .process-step, .benefit-item, .review-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+        
+        // 후기 도움이 됐어요 버튼 클릭
+        document.querySelectorAll('.review-helpful').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const currentCount = parseInt(this.textContent.match(/\d+/)[0]);
+                this.innerHTML = `👍 도움이 됐어요 (${currentCount + 1})`;
+                this.style.color = 'var(--primary)';
+                this.style.pointerEvents = 'none';
+            });
+        });
     </script>
 </body>
 </html>
